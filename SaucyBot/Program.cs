@@ -1,6 +1,7 @@
 using SaucyBot;
 using SaucyBot.Database;
 using SaucyBot.Library.Sites.ArtStation;
+using SaucyBot.Library.Sites.BlueSky;
 using SaucyBot.Library.Sites.DeviantArt;
 using SaucyBot.Library.Sites.E621;
 using SaucyBot.Library.Sites.ExHentai;
@@ -58,6 +59,7 @@ await Host.CreateDefaultBuilder(args)
         services.AddSingleton<IFxTwitterClient, FxTwitterClient>();
         services.AddSingleton<ITwitterImageSyndicationClient, TwitterImageSyndicationClient>();
         services.AddSingleton<IMisskeyClient, MisskeyClient>();
+        services.AddSingleton<IVixBlueskyClient, VixBlueskyClient>();
 
         services.AddSingleton<FurAffinity>();
         services.AddSingleton<Pixiv>();
@@ -70,6 +72,7 @@ await Host.CreateDefaultBuilder(args)
         services.AddSingleton<Newgrounds>();
         services.AddSingleton<Reddit>();
         services.AddSingleton<Misskey>();
+        services.AddSingleton<Bluesky>();
 
         services.AddHostedService<Worker>();
     })
