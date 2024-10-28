@@ -125,14 +125,18 @@ public sealed class MessageManager
         var messages = new List<Message>();
 
         var embed = response.Embeds.First();
-
+        
         var message = new Message(
-            response.Text, 
-            new List<Embed> { embed },
-            response.Files
+            Embeds: new List<Embed> { embed },
+            Files: response.Files
         );
         
         messages.Add(message);
+        
+        if (response.Text is not null)
+        {
+            messages.Add(new Message(response.Text));
+        }
         
         return Task.FromResult(messages);
     }

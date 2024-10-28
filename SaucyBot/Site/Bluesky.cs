@@ -1,3 +1,4 @@
+using System.Net;
 using System.Text.RegularExpressions;
 using Discord;
 using Discord.WebSocket;
@@ -35,6 +36,8 @@ public sealed class Bluesky : BaseSite
             match.Groups["user"].Value,
             match.Groups["id"].Value
         );
+        
+        var url = $"https://bsky.app/profile/{match.Groups["user"].Value}/post/{match.Groups["id"].Value}";
 
         var post = response?.Posts.FirstOrDefault();
 
@@ -53,15 +56,15 @@ public sealed class Bluesky : BaseSite
 
         if (hasVideo)
         {
-            return HandleVideo(post, videoMedia);
+            return HandleVideo(url, match, post);
         }
 
         if (hasPhoto)
         {
-            return HandlePhoto(post, photoMedia);
+            return HandlePhoto(url, post, photoMedia);
         }
 
-        return HandleRegular(post);
+        return HandleRegular(url, post);
     }
 
     private Task<List<VixBlueskyEmbedImage>> FindAllPhotoElements(VixBlueskyPost post)
@@ -82,7 +85,7 @@ public sealed class Bluesky : BaseSite
     }
     
 
-    private ProcessResponse HandlePhoto(VixBlueskyPost post, IEnumerable<VixBlueskyEmbedImage> results)
+    private ProcessResponse HandlePhoto(string url, VixBlueskyPost post, IEnumerable<VixBlueskyEmbedImage> results)
     {
         _logger.LogDebug("Processing as photo embed");
         
@@ -92,7 +95,7 @@ public sealed class Bluesky : BaseSite
         {
             var embed = new EmbedBuilder
             {
-                Url = "",
+                Url = url,
                 Timestamp = DateTimeOffset.Parse(post.Record.CreatedAt),
                 Color = this.Color,
                 Description = post.Record.Text,
@@ -139,15 +142,17 @@ public sealed class Bluesky : BaseSite
     }
     
 
-    private ProcessResponse HandleVideo(VixBlueskyPost post, IEnumerable<string> results)
+    private ProcessResponse HandleVideo(string url, Match match, VixBlueskyPost post)
     {
         _logger.LogDebug("Processing as video embed");
+        
+        var videoUrl = $"https://r.bskyx.app/profile/{match.Groups["user"].Value}/post/{match.Groups["id"].Value}";
         
         var response = new ProcessResponse();
         
         var embed = new EmbedBuilder
         {
-            Url = "",
+            Url = url,
             Timestamp = DateTimeOffset.Parse(post.Record.CreatedAt),
             Color = this.Color,
             Description = post.Record.Text,
@@ -187,18 +192,20 @@ public sealed class Bluesky : BaseSite
         };
         
         response.Embeds.Add(embed.Build());
-            
+
+        response.Text = videoUrl;
+        
         return response;
     }
     
     
-    private ProcessResponse HandleRegular(VixBlueskyPost post)
+    private ProcessResponse HandleRegular(string url, VixBlueskyPost post)
     {
         var response = new ProcessResponse();
         
         var embed = new EmbedBuilder
         {
-            Url = "",
+            Url = url,
             Timestamp = DateTimeOffset.Parse(post.Record.CreatedAt),
             Color = this.Color,
             Description = post.Record.Text,
@@ -236,7 +243,7 @@ public sealed class Bluesky : BaseSite
             },
             Footer = new EmbedFooterBuilder { IconUrl = Constants.BlueskyIconUrl, Text = "Bluesky" },
         };
-            
+        
         response.Embeds.Add(embed.Build());
             
         return response;

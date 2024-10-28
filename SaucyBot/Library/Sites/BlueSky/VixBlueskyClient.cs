@@ -79,7 +79,7 @@ public class VixBlueskyClient: IVixBlueskyClient
         }
         catch (Exception e)
         {
-            _logger.LogDebug(e, "Failed to deserialize FxTwitter response, response not JSON or is malformed.");
+            _logger.LogDebug(e, "Failed to deserialize VixBluesky response, response not JSON or is malformed.");
             return null;
         } 
     }
