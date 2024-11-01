@@ -56,7 +56,7 @@ public sealed class Bluesky : BaseSite
 
         if (hasVideo)
         {
-            return HandleVideo(url, match, post);
+            return HandleVideoLazy(match);
         }
 
         if (hasPhoto)
@@ -194,6 +194,15 @@ public sealed class Bluesky : BaseSite
         response.Embeds.Add(embed.Build());
 
         response.Text = videoUrl;
+        
+        return response;
+    }
+
+    private ProcessResponse HandleVideoLazy(Match match)
+    {
+        var response = new ProcessResponse();
+        
+        response.Text = $"https://bskyx.app/profile/{match.Groups["user"].Value}/post/{match.Groups["id"].Value}";
         
         return response;
     }
