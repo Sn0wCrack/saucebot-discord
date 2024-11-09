@@ -213,6 +213,8 @@ public sealed class Worker : BackgroundService
         {
             var sauceCommand = new SlashCommandBuilder();
             sauceCommand.WithName("sauce")
+                .WithIntegrationTypes(ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall)
+                .WithContextTypes(InteractionContextType.Guild, InteractionContextType.BotDm, InteractionContextType.PrivateChannel)
                 .WithDescription("Create an embed from the provided URL");
 
             var sauceOption = new SlashCommandOptionBuilder();
