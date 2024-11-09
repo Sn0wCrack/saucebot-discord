@@ -322,6 +322,12 @@ public sealed partial class SiteManager
     
     private bool HasPermissionsToCreateEmbed(SocketInteraction message)
     {
+        // User Commands _should_ always have the correct permissions in these channels to do what we need to do
+        if (message.Channel is SocketDMChannel or SocketGroupChannel)
+        {
+            return true;
+        }
+        
         if (message.Channel is SocketGuildChannel guildChannel)
         {
             var permissions = guildChannel.Guild.CurrentUser.GetPermissions(guildChannel);
