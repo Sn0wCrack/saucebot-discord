@@ -99,6 +99,8 @@ public sealed record VixBlueskyPost(
     VixBlueskyRecord Record,
     [property: JsonPropertyName("embed")]
     VixBlueskyEmbed? Embed,
+    [property: JsonPropertyName("embeds")]
+    List<VixBlueskyEmbed>? Embeds,
     [property: JsonPropertyName("replyCount")]
     int Replies,
     [property: JsonPropertyName("repostCount")]
@@ -137,14 +139,15 @@ public sealed record VixBlueskyRecordEmbed(
 public sealed record VixBlueskyEmbed(
     [property: JsonPropertyName("$type")]
     string Type,
-    
     // Available on type: app.bsky.embed.video#view
     [property: JsonPropertyName("playlist")]
     string? Playlist,
-    
     // Available n type: app.bsky.embed.images#view
     [property: JsonPropertyName("images")]
-    List<VixBlueskyEmbedImage>? Images
+    List<VixBlueskyEmbedImage>? Images,
+    // Available on type: app.bsky.embed.record#view
+    [property: JsonPropertyName("record")]
+    VixBlueskyPost? Record
 );
 
 public sealed record VixBlueskyEmbedImage(

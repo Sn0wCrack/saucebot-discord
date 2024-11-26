@@ -26,7 +26,6 @@ public sealed class Bluesky : BaseSite
     {
         _logger = logger;
         _configuration = configuration;
-        
         _client = client;
     }
 
@@ -200,10 +199,11 @@ public sealed class Bluesky : BaseSite
 
     private ProcessResponse HandleVideoLazy(Match match)
     {
-        var response = new ProcessResponse();
-        
-        response.Text = $"https://bskyx.app/profile/{match.Groups["user"].Value}/post/{match.Groups["id"].Value}";
-        
+        var response = new ProcessResponse
+        {
+            Text = $"https://bskyx.app/profile/{match.Groups["user"].Value}/post/{match.Groups["id"].Value}"
+        };
+
         return response;
     }
     
