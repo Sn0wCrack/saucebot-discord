@@ -192,9 +192,9 @@
       },
       "StackExchange.Redis": {
         "type": "Direct",
-        "requested": "[2.8.16, )",
-        "resolved": "2.8.16",
-        "contentHash": "WaoulkOqOC9jHepca3JZKFTqndCWab5uYS7qCzmiQDlrTkFaDN7eLSlEfHycBxipRnQY9ppZM7QSsWAwUEGblw==",
+        "requested": "[2.8.22, )",
+        "resolved": "2.8.22",
+        "contentHash": "GRA97f4cHYxBI/fKOfgs3GyKklc5is6YKM2yWbkiCZGR/JKsXIo0sRJSSeJabriJAZkKFthM0rXnULFfSbs0KA==",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
           "Pipelines.Sockets.Unofficial": "2.2.8"
