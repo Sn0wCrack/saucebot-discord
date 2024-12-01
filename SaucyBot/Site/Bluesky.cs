@@ -68,7 +68,7 @@ public sealed class Bluesky : BaseSite
 
     private Task<List<VixBlueskyEmbedImage>> FindAllPhotoElements(VixBlueskyPost post)
     {
-        return Task.FromResult(post.Embed?.Images ?? []);
+        return Task.FromResult(post.Embed?.Images ?? post.Embed?.Media?.Images ?? []);
     }
 
     private Task<List<string>> FindAllVideoElements(VixBlueskyPost post)

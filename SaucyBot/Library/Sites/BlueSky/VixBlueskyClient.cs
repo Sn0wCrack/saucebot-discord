@@ -142,12 +142,20 @@ public sealed record VixBlueskyEmbed(
     // Available on type: app.bsky.embed.video#view
     [property: JsonPropertyName("playlist")]
     string? Playlist,
-    // Available n type: app.bsky.embed.images#view
+    // Available on type: app.bsky.embed.images#view
     [property: JsonPropertyName("images")]
     List<VixBlueskyEmbedImage>? Images,
-    // Available on type: app.bsky.embed.record#view
+    // Available on type: app.bsky.embed.recordWithMedia#view
+    [property: JsonPropertyName("media")]
+    VixBlueskyEmbedMedia? Media,
+    // Available on type: app.bsky.embed.record#view and app.bsky.embed.recordWithMedia#view
     [property: JsonPropertyName("record")]
     VixBlueskyPost? Record
+);
+
+public sealed record VixBlueskyEmbedMedia(
+    [property: JsonPropertyName("images")]
+    List<VixBlueskyEmbedImage>? Images
 );
 
 public sealed record VixBlueskyEmbedImage(
