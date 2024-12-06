@@ -575,8 +575,8 @@
       },
       "Serilog": {
         "type": "Transitive",
-        "resolved": "4.1.0",
-        "contentHash": "u1aZI8HZ62LWlq5dZLFwm6jMax/sUwnWZSw5lkPsCt518cJBxFKoNmc7oSxe5aA5BgSkzy9rzwFGR/i/acnSPw=="
+        "resolved": "4.2.0",
+        "contentHash": "gmoWVOvKgbME8TYR+gwMf7osROiWAURterc6Rt2dQyX7wtjZYpqFiA/pY6ztjGQKKV62GGCyOcmtP1UKMHgSmA=="
       },
       "Serilog.Extensions.Hosting": {
         "type": "Transitive",
@@ -781,7 +781,7 @@
           "Microsoft.Extensions.Hosting": "[8.0.1, )",
           "Polly.Core": "[8.5.0, )",
           "Pomelo.EntityFrameworkCore.MySql": "[8.0.2, )",
-          "Serilog": "[4.1.0, )",
+          "Serilog": "[4.2.0, )",
           "Serilog.Extensions.Hosting": "[8.0.0, )",
           "Serilog.Settings.Configuration": "[8.0.4, )",
           "Serilog.Sinks.Console": "[6.0.0, )",
