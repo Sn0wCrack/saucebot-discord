@@ -10,9 +10,17 @@
     }
   },
   "Bot": {
+    "ShardMode": "Automatic",
+    "DiscordStatus": {
+        "Enabled": true,
+        "Type": "Watching",
+        "Text": "your links..."
+    },
+    "MessageCacheSize": 10,
     "DiscordToken": "",
+    "ConnectionTimeout": 120000,
     "DisabledSites": [],
-    "MaximumEmbeds": 5
+    "MaximumEmbeds": 8
   },
   "Database": {
     "ConnectionString": "server=database;user=root;password=secret;database=bot"
@@ -34,7 +42,7 @@
     "Pixiv": {
       "Login": "",
       "Password": "",
-      "Cookie": "",
+      "SessionCookie": "",
       "PostLimit": 5,
       "UgoiraFormat": "mp4",
       "UgoiraBitrate": 2000
