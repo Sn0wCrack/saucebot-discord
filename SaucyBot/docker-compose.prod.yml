@@ -28,12 +28,17 @@ services:
             retries: 10
         
     cache:
-        image: "redis:7-alpine@sha256:c1e88455c85225310bbea54816e9c3f4b5295815e6dbf80c34d40afc6df28275"
+        image: "valkey/valkey:8-alpine@sha256:75010b6854cb5ba6a0b1540d1bd3238541a31e3f8018cd31f9e5b92bb3192fa6"
         ports:
             - "6379:6379"
         volumes:
             - cache:/data
         restart: unless-stopped
+        healthcheck:
+            test: '[ $(valkey-cli -h 127.0.0.1 ping) = "PONG" ]'
+            timeout: 30s
+            retries: 10
+            start_period: 10s
 
 volumes: 
     cache:

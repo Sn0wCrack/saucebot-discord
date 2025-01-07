@@ -11,8 +11,6 @@ public sealed class Misskey : BaseSite
 {
     public override string Identifier => "Misskey";
 
-    protected override string Pattern => @"(?<url>https?:\/\/(www\.)?misskey\.(io|design))\/notes\/(?<id>[0-9a-z]+)";
-
     protected override Color Color => new(0x85B300);
 
     private readonly ILogger<Misskey> _logger;
@@ -24,6 +22,13 @@ public sealed class Misskey : BaseSite
     ) {
         _logger = logger;
         _client = client;
+
+        var domains = new List<string> { "misskey.io", "misskey.design", "oekakiskey.com" }
+            .Select(Regex.Escape);
+
+        var regex = String.Join("|", domains);
+
+        Pattern = @$"(?<url>https?:\/\/(www\.)?({regex}))\/notes\/(?<id>[0-9a-z]+)";
     }
 
     public override async Task<ProcessResponse?> Process(Match match, SocketUserMessage? message = null)

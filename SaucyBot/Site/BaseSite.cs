@@ -9,7 +9,7 @@ public abstract class BaseSite
 {
     public virtual string Identifier => "Base";
 
-    protected virtual string Pattern => "base";
+    protected virtual string Pattern { set; get; } = string.Empty;
 
     protected virtual Color Color => Color.Default;
     
