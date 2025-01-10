@@ -64,6 +64,9 @@
     "DeviantArt": {
       "ClientId": 0,
       "ClientSecret": ""
+    },
+    "Misskey": {
+        "Delay": "2.00"
     }
   }
 }
